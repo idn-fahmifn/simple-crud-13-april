@@ -16,6 +16,21 @@
 @endsection
 
 @section('content')
+
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Terjadi Kesalahan!</strong> Berikut adalah kesalahan anda :
+            <ol>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ol>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+
+
     <div class="row">
         <div class="col-md-3">
             <div class="card">
@@ -39,7 +54,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" id="nama_kategori" class="form-control mt-2">
+                            <input type="text" name="nama_kategori" value="@old('nama_kategori')" id="nama_kategori" class="form-control mt-2">
                         </div>
                     </div>
                     <div class="modal-footer">
