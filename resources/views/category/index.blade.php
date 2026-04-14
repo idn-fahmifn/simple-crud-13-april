@@ -16,8 +16,7 @@
 @endsection
 
 @section('content')
-
-    {{-- @if ($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Terjadi Kesalahan!</strong> Berikut adalah kesalahan anda :
             <ol>
@@ -27,7 +26,14 @@
             </ol>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif --}}
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Berhasil!</strong> Data berhasil dibuat
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
 
 
@@ -54,7 +60,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" value="{{ @old('nama_kategori') }}" id="nama_kategori" class="form-control mt-2 @error('nama_kategori') is-invalid @enderror ">
+                            <input type="text" name="nama_kategori" value="{{ @old('nama_kategori') }}"
+                                id="nama_kategori" class="form-control mt-2 @error('nama_kategori') is-invalid @enderror ">
                             @error('nama_kategory')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
