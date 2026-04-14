@@ -40,7 +40,15 @@
 
     <div class="container mt-4">
         <div class="card">
-            <div class="card-body"></div>
+            <div class="card-body">
+                {{-- memanggil area yang diambil dari UI index dll --}}
+                @yield('title')
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-body">
+                @yield('content')
+            </div>
         </div>
     </div>
 
