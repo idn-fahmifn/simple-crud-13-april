@@ -28,7 +28,7 @@ class CategoryController extends Controller
 
         // simpan data array data_simpan ke database
         Category::create($data_simpan);
-        return redirect()->route('category.index')->with('success','kategori Berhasil Disimpan');
+        return redirect()->route('category.index')->with('success','Kategori berhasil disimpan');
 
     }
 }
