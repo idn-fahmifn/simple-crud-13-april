@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            
-            $table->foreignId('category_id')->nullable()
-            ->constrained('categories')
-            ->cascadeOnUpdate()
-            ->nullOnDelete();
+            $table->uuid()->unique();
+
+            $table->foreignId('category_id')
+            ->nullable() //category_id boleh dikosongkan
+            ->constrained('categories') //berelasi dengan tabel category
+            ->cascadeOnUpdate() //menjalar saat data category diubah
+            // saat data kategory diubah, maka category id akan berubah menjadi null
+            ->nullOnDelete(); 
 
             $table->string('item_name');
             $table->string('brand');
