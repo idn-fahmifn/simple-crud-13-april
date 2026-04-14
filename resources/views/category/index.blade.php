@@ -38,15 +38,26 @@
 
 
     <div class="row">
-        <div class="col-md-3">
+        @forelse ($categories as $category)
+            <div class="col-md-3 mt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>{{ $category->name }}</h5>
+                        <div class="mt-2">Dibuat pada : </div>
+                        <a href="" class="btn btn-success mt-2 btn-full d-flex justify-content-center">detail</a>
+                    </div>
+                </div>
+            </div>
+        @empty
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h5>Nama Kategori</h5>
-                    <div class="mt-2">Dibuat pada : </div>
-                    <a href="" class="btn btn-success mt-2 btn-full d-flex justify-content-center">detail</a>
+                    Data kategori tidak ditemukan.
                 </div>
             </div>
         </div>
+        @endforelse
+
     </div>
     <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
