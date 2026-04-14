@@ -2,12 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     public function index()
     {
         return view('category.index');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            // harus disesuaikan dengan name yang ada di form.
+            'nama_kategori' => 'required|string|min:3|max:20', 
+        ]);
+
+        // buat array untuk data yang ingin disimpan
+        $data_simpan = [
+            'name' => $request->input('nama_kategori'),
+            'uuid' => Str::orderedUuid()
+        ];
+
+        // simpan data array data_simpan ke database
+        Category::create($data_simpan);
+        return redirect()->route('category.index')->with('success','kategori Berhasil Disimpan');
+
     }
 }

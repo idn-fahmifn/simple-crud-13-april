@@ -8,7 +8,13 @@ Route::get('/', function () {
 });
 
 // Routing Category
-Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/category', [CategoryController::class, 'index'])
+->name('category.index');
+
+Route::post('/category', [CategoryController::class, 'store'])
+->name('category.store');
+
+
 
 // ini khusus untuk statis dan sifatnya semntara
 Route::view('tampilan', 'template.app');
