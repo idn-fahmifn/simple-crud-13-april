@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card-title">
-                <h3>Data Kategori</h3>
+                <h3>Data Barang</h3>
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
@@ -38,25 +38,30 @@
 
 
     <div class="row">
-        @forelse ($categories as $category)
-            <div class="col-md-3 mt-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>{{ $category->name }}</h5>
-                        <div class="mt-2 text-muted fs-6">{{ $category->created_at->diffForHumans() }} </div>
-                        <a href="{{ route('category.show', $category->uuid) }}" class="btn btn-success mt-2 btn-full d-flex justify-content-center">detail</a>
-                    </div>
-                </div>
-            </div>
-        @empty
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    Data kategori tidak ditemukan.
-                </div>
-            </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <th>Nama Barang</th>
+                    <th>Merek</th>
+                    <th>Category</th>
+                    <th>#</th>
+                </thead>
+                <tbody>
+                    @forelse ($items as $item)
+                        <tr>
+                            <td>{{ $item->item_name }}</td>
+                            <td>{{ $item->brand }}</td>
+                            <td>{{ $item->category }}</td>
+                            <td>#</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4">Data barang belum ada.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-        @endforelse
 
     </div>
     <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,7 +71,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kategori Baru</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('category.store') }}" method="post">
+                <form action="{{ route('item.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
