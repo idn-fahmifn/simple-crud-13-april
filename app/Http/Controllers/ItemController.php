@@ -29,7 +29,7 @@ class ItemController extends Controller
             'merk' => 'required|string|min:3|max:20',
             'stok' => 'required|integer|min:1|max:100',
             'gambar' => 'required|file|max:2048|mimes:png,jpg,jpeg,gif,svg',
-            'desc' => 'required',
+            'deskripsi' => 'required',
         ]);
 
         // buat array untuk data yang ingin disimpan
@@ -39,7 +39,7 @@ class ItemController extends Controller
             'category_id' => $request->input('kategori'),
             'brand' => $request->input('merk'),
             'stock' => $request->input('stok'),
-            'desc' => $request->input('desc'),
+            'desc' => $request->input('deskripsi'),
         ];
 
         // jika ada gambar yang diupload
@@ -48,15 +48,17 @@ class ItemController extends Controller
             $lokasi = 'public/images/items';
             $format = $gambar->extension();
             $nama = 'siinventaris_'.Carbon::now('Asia/Jakarta')
-            ->format('Ymdhis').random_int(000, 999).'.'.$format;
+            ->format('YmdHis').random_int(000, 999).'.'.$format;
             $data_simpan['image'] = $nama;
+
+            // simpan gambar ke lokasi yang sudah di define
+            $gambar->storeAs($lokasi, $nama);
         }
 
-        return $data_simpan;
 
         // simpan data array data_simpan ke database
-        // Category::create($data_simpan);
-        // return redirect()->route('category.index')->with('success', 'Kategori berhasil disimpan');
+        Item::create($data_simpan);
+        return redirect()->route('item.index')->with('success', 'Barang berhasil disimpan');
     }
 
     public function show($param)
