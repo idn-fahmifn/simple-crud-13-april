@@ -51,7 +51,7 @@
                         <tr>
                             <td>{{ $item->item_name }}</td>
                             <td>{{ $item->brand }}</td>
-                            <td>{{ $item->category }}</td>
+                            <td>{{ $item->category->name }}</td>
                             <td>#</td>
                         </tr>
                     @empty
