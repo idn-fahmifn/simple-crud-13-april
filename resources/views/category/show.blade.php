@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card-title">
-                <h3>Data Kategori</h3>
+                <h3 class="text-uppercase">{{ $category->name }}</h3>
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal">
-                Buat Baru
+                Ubah
             </button>
         </div>
     </div>
@@ -38,25 +38,19 @@
 
 
     <div class="row">
-        @forelse ($categories as $category)
-            <div class="col-md-3 mt-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>{{ $category->name }}</h5>
-                        <div class="mt-2 text-muted fs-6">{{ $category->created_at->diffForHumans() }} </div>
-                        <a href="{{ route('category.show', $category->uuid) }}" class="btn btn-success mt-2 btn-full d-flex justify-content-center">detail</a>
-                    </div>
-                </div>
-            </div>
-        @empty
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    Data kategori tidak ditemukan.
-                </div>
-            </div>
+        <div class="card-title mb-4">
+            <h6>Barang yang ada di kategori {{ $category->name }}</h6>
         </div>
-        @endforelse
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <th>Nama Barang</th>
+                    <th>Merek</th>
+                    <th>Stok</th>
+                    <th>#</th>
+                </thead>
+            </table>
+        </div>
 
     </div>
     <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

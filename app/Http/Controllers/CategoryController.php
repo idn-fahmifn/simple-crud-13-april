@@ -32,6 +32,13 @@ class CategoryController extends Controller
         // simpan data array data_simpan ke database
         Category::create($data_simpan);
         return redirect()->route('category.index')->with('success','Kategori berhasil disimpan');
-
     }
+
+    public function show($param)
+    {
+        // find digunakan untuk mencari ID
+        $category = Category::where('uuid',$param)->firstOrFail();
+        return view('category.show', compact('category'));
+    }
+
 }

@@ -14,6 +14,11 @@ Route::get('/category', [CategoryController::class, 'index'])
 Route::post('/category', [CategoryController::class, 'store'])
 ->name('category.store');
 
+Route::get('/category/{param}', [CategoryController::class, 'show'])
+->name('category.show');
+
+
+
 
 
 // ini khusus untuk statis dan sifatnya semntara
