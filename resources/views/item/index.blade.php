@@ -71,7 +71,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Barang Baru</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('item.store') }}" method="post">
+                <form action="{{ route('item.store') }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group my-2">
@@ -99,12 +99,12 @@
                         </div>
                         <div class="form-group
                                 my-2">
-                                <label for="">Merek</label>
-                                <input type="text" name="merk" value="{{ @old('merk') }}" id="merk"
-                                    class="form-control mt-2 @error('merk') is-invalid @enderror ">
-                                @error('merk')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                            <label for="">Merek</label>
+                            <input type="text" name="merk" value="{{ @old('merk') }}" id="merk"
+                                class="form-control mt-2 @error('merk') is-invalid @enderror ">
+                            @error('merk')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group my-2">
                             <label for="">Stok</label>
