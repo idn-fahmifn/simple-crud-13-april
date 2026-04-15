@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal">
                     Ubah
                 </button>
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin kategori ini akan dihapus?')">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin barang ini akan dihapus?')">
                     Hapus
                 </button>
             </form>

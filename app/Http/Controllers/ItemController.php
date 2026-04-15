@@ -102,7 +102,7 @@ class ItemController extends Controller
 
             $path_lama = 'public/images/items/' . $data->image;
 
-            if($data->image && Storage::exists($path_lama)){
+            if ($data->image && Storage::exists($path_lama)) {
                 Storage::delete($path_lama);
             }
 
@@ -124,8 +124,15 @@ class ItemController extends Controller
 
     public function destroy($param)
     {
-        $category = Category::findOrFail($param);
-        $category->delete();
-        return redirect()->route('category.index')->with('success', 'Kategori berhasil dihapus');
+        $item = Item::findOrFail($param);
+
+        $path_lama = 'public/images/items/' . $item->image;
+
+        if ($item->image && Storage::exists($path_lama)) {
+            Storage::delete($path_lama);
+        }
+
+        $item->delete();
+        return redirect()->route('item.index')->with('success', 'Barang berhasil dihapus');
     }
 }
