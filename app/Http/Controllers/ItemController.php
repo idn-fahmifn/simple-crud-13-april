@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Item;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ItemController extends Controller
@@ -65,28 +66,59 @@ class ItemController extends Controller
     {
         // find digunakan untuk mencari ID
         $item = Item::where('uuid', $param)->firstOrFail();
-        return view('item.show', compact('item'));
+        $categories = Category::all();
+        return view('item.show', compact('item', 'categories'));
     }
 
     public function update(Request $request, $param)
     {
         // cari data mana yang mau diedit
-        $data = Category::findOrFail($param);
+        $data = Item::findOrFail($param);
 
         $request->validate([
             // harus disesuaikan dengan name yang ada di form.
-            'nama_kategori' => 'required|string|min:3|max:20',
+            'nama_barang' => 'required|string|min:3|max:20',
+            'kategori' => 'required|integer|exists:categories,id',
+            'merk' => 'required|string|min:3|max:20',
+            'stok' => 'required|integer|min:1|max:100',
+            'gambar' => 'nullable|file|max:2048|mimes:png,jpg,jpeg,gif,svg',
+            'deskripsi' => 'required',
         ]);
 
         // buat array untuk data yang ingin disimpan
         $data_simpan = [
-            'name' => $request->input('nama_kategori'),
-            'uuid' => Str::orderedUuid()
+            'item_name' => $request->input('nama_barang'),
+            'uuid' => Str::orderedUuid(),
+            'category_id' => $request->input('kategori'),
+            'brand' => $request->input('merk'),
+            'stock' => $request->input('stok'),
+            'desc' => $request->input('deskripsi'),
         ];
+
+        // jika ada gambar yang diupload
+        if ($request->hasFile('gambar')) {
+
+            // menghapus path lama
+
+            $path_lama = 'storage/images/items/'.$data->image;
+            if($data->image && Storage::exists($path_lama)){
+                Storage::delete($path_lama);
+            }
+
+            $gambar = $request->file('gambar');
+            $lokasi = 'public/images/items';
+            $format = $gambar->extension();
+            $nama = 'siinventaris_' . Carbon::now('Asia/Jakarta')
+                ->format('YmdHis') . random_int(000, 999) . '.' . $format;
+            $data_simpan['image'] = $nama;
+
+            // simpan gambar ke lokasi yang sudah di define
+            $gambar->storeAs($lokasi, $nama);
+        }
 
         // simpan data array data_simpan ke database
         $data->update($data_simpan);
-        return redirect()->route('category.show', $data->uuid)->with('success', 'Kategori berhasil diubah');
+        return redirect()->route('item.show', $data->uuid)->with('success', 'Barang berhasil diubah');
     }
 
     public function destroy($param)
