@@ -89,6 +89,7 @@
                 </div>
                 <form action="{{ route('item.update', $item->id) }}" enctype="multipart/form-data" method="post">
                     @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="form-group my-2">
                             <label for="">Nama barang</label>

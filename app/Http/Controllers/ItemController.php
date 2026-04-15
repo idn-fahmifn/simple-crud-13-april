@@ -100,7 +100,8 @@ class ItemController extends Controller
 
             // menghapus path lama
 
-            $path_lama = 'storage/images/items/'.$data->image;
+            $path_lama = 'public/images/items/' . $data->image;
+
             if($data->image && Storage::exists($path_lama)){
                 Storage::delete($path_lama);
             }
