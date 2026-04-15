@@ -20,6 +20,15 @@ Route::get('/category/{param}', [CategoryController::class, 'show'])
 Route::put('/category/{param}', [CategoryController::class, 'update'])
 ->name('category.update');
 
+Route::delete('/category/{param}', [CategoryController::class, 'destroy'])
+->name('category.destroy');
+
+// untuk menghapus : 
+/**
+ * hapus biasa / delete => delete
+ * restore => method put / patch dengan parameter => sama seperti show
+ * melihat history => method get.
+ */
 
 
 

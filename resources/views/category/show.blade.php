@@ -8,9 +8,17 @@
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal">
-                Ubah
-            </button>
+            <form action="{{ route('category.destroy', $category->id) }}" method="post">
+                @csrf
+                @method('delete')
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal">
+                    Ubah
+                </button>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin kategori ini akan dihapus?')">
+                    Hapus
+                </button>
+            </form>
+
         </div>
     </div>
 @endsection
@@ -66,8 +74,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" value="{{ $category->name }}"
-                                id="nama_kategori" class="form-control mt-2 @error('nama_kategori') is-invalid @enderror ">
+                            <input type="text" name="nama_kategori" value="{{ $category->name }}" id="nama_kategori"
+                                class="form-control mt-2 @error('nama_kategori') is-invalid @enderror ">
                             @error('nama_kategory')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

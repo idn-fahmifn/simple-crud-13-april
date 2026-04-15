@@ -71,18 +71,18 @@ class CategoryController extends Controller
 
     // jika kita ingin mengembalikan data yang dihapus : 
 
-    public function restore(Request $request, $param)
-    {
-        Category::withTrashed()->findOrFail($param)->restore();
-        return redirect()->route('category.index')->with('success', 'Kategori berhasil dikembalikan');
-    }
+    // public function restore(Request $request, $param)
+    // {
+    //     Category::withTrashed()->findOrFail($param)->restore();
+    //     return redirect()->route('category.index')->with('success', 'Kategori berhasil dikembalikan');
+    // }
 
     // delete permanen
-    public function forceDelete(Request $request, $param)
-    {
-        Category::withTrashed()->findOrFail($param)->forceDelete();
-        return redirect()->route('category.index')->with('success', 'Kategori berhasil dihaous secara permanen');
-    }
+    // public function forceDelete(Request $request, $param)
+    // {
+    //     Category::withTrashed()->findOrFail($param)->forceDelete();
+    //     return redirect()->route('category.index')->with('success', 'Kategori berhasil dihaous secara permanen');
+    // }
 
 
     // Soft Delete : 
