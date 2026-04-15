@@ -64,8 +64,8 @@ class ItemController extends Controller
     public function show($param)
     {
         // find digunakan untuk mencari ID
-        $category = Category::where('uuid', $param)->firstOrFail();
-        return view('category.show', compact('category'));
+        $item = Item::where('uuid', $param)->firstOrFail();
+        return view('item.show', compact('item'));
     }
 
     public function update(Request $request, $param)

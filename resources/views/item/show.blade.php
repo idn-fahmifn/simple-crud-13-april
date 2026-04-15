@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card-title">
-                <h3 class="text-uppercase">{{ $category->name }}</h3>
+                <h3 class="text-uppercase">{{ $item->item_name }}</h3>
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-            <form action="{{ route('category.destroy', $category->id) }}" method="post">
+            <form action="{{ route('item.destroy', $item->id) }}" method="post">
                 @csrf
                 @method('delete')
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal">
@@ -47,16 +47,35 @@
 
     <div class="row">
         <div class="card-title mb-4">
-            <h6>Barang yang ada di kategori {{ $category->name }}</h6>
+            <h6>Detail {{ $item->item_name }}</h6>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <th>Nama Barang</th>
-                    <th>Merek</th>
-                    <th>Stok</th>
-                    <th>#</th>
-                </thead>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">Nama Barang</td>
+                        <td>{{ $item->item_name }}</td>
+                        <td rowspan="5" class="text-center">
+                            <img src="{{ asset('storage/images/items/' . $item->image) }}" class="img-fluid " width="360" alt="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Kategori</td>
+                        <td>{{ $item->category->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Merek</td>
+                        <td>{{ $item->brand }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Stok</td>
+                        <td>{{ $item->stock }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Deskripsi</td>
+                        <td>{{ $item->desc }}</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 
@@ -68,24 +87,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kategori</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('category.update', $category->id) }}" method="post">
-                    @csrf
-                    @method('put')
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" value="{{ $category->name }}" id="nama_kategori"
-                                class="form-control mt-2 @error('nama_kategori') is-invalid @enderror ">
-                            @error('nama_kategory')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+                
             </div>
         </div>
     </div>
