@@ -61,4 +61,33 @@ class CategoryController extends Controller
         $data->update($data_simpan);
         return redirect()->route('category.show', $data->uuid)->with('success', 'Kategori berhasil diubah');
     }
+
+    public function destroy($param)
+    {
+        $category = Category::findOrFail($param);
+        $category->delete();
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil dihapus');
+    }
+
+    // jika kita ingin mengembalikan data yang dihapus : 
+
+    public function restore(Request $request, $param)
+    {
+        Category::withTrashed()->findOrFail($param)->restore();
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil dikembalikan');
+    }
+
+    // delete permanen
+    public function forceDelete(Request $request, $param)
+    {
+        Category::withTrashed()->findOrFail($param)->forceDelete();
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil dihaous secara permanen');
+    }
+
+
+    // Soft Delete : 
+    /**
+     * 1. buat kolom baru => $table->softDeletes() => menambhkan kolom soft delete
+     * 2. kita aktfikan soft delete di modelnya : 
+     */
 }
