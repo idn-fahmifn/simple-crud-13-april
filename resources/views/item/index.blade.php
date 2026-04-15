@@ -52,7 +52,9 @@
                             <td>{{ $item->item_name }}</td>
                             <td>{{ $item->brand }}</td>
                             <td>{{ $item->category->name }}</td>
-                            <td>#</td>
+                            <td>
+                                <a href="{{ route('item.show', $item->uuid) }}" class="btn btn-primary">Detail</a>
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -62,8 +64,8 @@
                 </tbody>
             </table>
         </div>
-
     </div>
+
     <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

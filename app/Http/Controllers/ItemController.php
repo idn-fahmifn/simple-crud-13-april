@@ -43,12 +43,12 @@ class ItemController extends Controller
         ];
 
         // jika ada gambar yang diupload
-        if($request->hasFile('gambar')){
+        if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
             $lokasi = 'public/images/items';
             $format = $gambar->extension();
-            $nama = 'siinventaris_'.Carbon::now('Asia/Jakarta')
-            ->format('YmdHis').random_int(000, 999).'.'.$format;
+            $nama = 'siinventaris_' . Carbon::now('Asia/Jakarta')
+                ->format('YmdHis') . random_int(000, 999) . '.' . $format;
             $data_simpan['image'] = $nama;
 
             // simpan gambar ke lokasi yang sudah di define
