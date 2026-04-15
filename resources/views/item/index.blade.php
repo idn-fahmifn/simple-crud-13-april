@@ -126,7 +126,7 @@
                         </div>
                         <div class="form-group my-2">
                             <label for="">Deskripsi barang</label>
-                            <textarea name="deskripsi" class="form-control mt-2 @error('deskripsi') is-invalid @enderror "></textarea>
+                            <textarea name="deskripsi" class="form-control mt-2 @error('deskripsi') is-invalid @enderror ">{{ @old('deskripsi') }}</textarea>
                             @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

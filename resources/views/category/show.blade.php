@@ -57,6 +57,22 @@
                     <th>Stok</th>
                     <th>#</th>
                 </thead>
+                <tbody>
+                    @forelse ($items as $item)
+                        <tr>
+                            <td>{{ $item->item_name }}</td>
+                            <td>{{ $item->brand }}</td>
+                            <td>{{ $item->stock }}</td>
+                            <td>
+                                <a href="{{ route('item.show', $item->uuid) }}" class="btn btn-primary">Detail</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center py-4">Data barang belum ada.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
             </table>
         </div>
 

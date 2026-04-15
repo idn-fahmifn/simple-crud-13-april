@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -38,7 +39,8 @@ class CategoryController extends Controller
     {
         // find digunakan untuk mencari ID
         $category = Category::where('uuid', $param)->firstOrFail();
-        return view('category.show', compact('category'));
+        $items = Item::where('category_id', $category->id)->get();
+        return view('category.show', compact('category', 'items'));
     }
 
     public function update(Request $request, $param)
